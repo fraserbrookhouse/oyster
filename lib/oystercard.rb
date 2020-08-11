@@ -5,13 +5,13 @@ class Oystercard
   attr_accessor :journey_list
   MAXIMUM_BALANCE = 90
   MINIMUM_BALANCE = 1
-  @entry_station = nil
-  @exit_station = nil
   
 
   def initialize
     @balance = 0
     @journey_list = []
+    @entry_station = nil
+    @exit_station = nil
   end
 
   def top_up(money)
