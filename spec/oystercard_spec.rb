@@ -45,13 +45,12 @@ describe Oystercard do
       subject.touch_out
       expect(subject.entry_station).to eq nil
     end
-   it 'deducts money from balance' do
-     subject.top_up(20)
-     subject.touch_in
-     expect { subject.touch_out }.to change {subject.balance}.by(-Oystercard::MINIMUM_BALANCE)
-   end
+    it 'deducts money from balance' do
+      subject.top_up(20)
+      subject.touch_in(station)
+      expect { subject.touch_out }.to change { subject.balance }.by(-Oystercard::MINIMUM_BALANCE)
+    end
   end
-
 
   describe '#top_up' do
     it { is_expected.to respond_to(:top_up).with(1).argument }
