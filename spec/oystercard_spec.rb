@@ -20,23 +20,38 @@ describe Oystercard do
   end
 
   describe '#touch_in' do
+    let(:station) { double :station }
     it 'starts the users journey' do
       subject.top_up(20)
-      subject.touch_in
+      subject.touch_in(station)
       expect(subject.in_journey?).to eq true
     end
 
     it 'raises error if balance is less than minimum amount' do
-      expect { subject.touch_in }.to raise_error 'Insufficient balance'
+      expect { subject.touch_in(station) }.to raise_error 'Insufficient balance'
+    end
+
+    it 'records the entry station' do
+      subject.top_up(20)
+      subject.touch_in(station)
+      expect(subject.entry_station).to eq station
     end
   end
 
   describe '#touch_out' do
+    let(:station) { double :station }
     it 'ends a users journey' do
       subject.top_up(20)
-      subject.touch_in
+      subject.touch_in(station)
       subject.touch_out
       expect(subject.in_journey?).to eq false
+    end
+
+    it 'sets entry_station to nil' do
+      subject.top_up(20)
+      subject.touch_in(station)
+      subject.touch_out
+      expect(subject.entry_station).to eq nil
     end
   end
 
