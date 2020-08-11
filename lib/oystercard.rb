@@ -1,7 +1,3 @@
-class Station 
-
-end
-
 class Oystercard
   attr_reader :balance
   attr_accessor :entry_station
