@@ -5,6 +5,10 @@ describe Oystercard do
     expect(subject.balance).to eq(0)
   end
 
+  it 'has no journeys' do
+    expect(subject.journey_list.count).to eq(0)
+  end
+  
   describe '#in_journey?' do
     it 'returns false by default' do
       expect(subject).not_to be_in_journey
@@ -13,6 +17,7 @@ describe Oystercard do
 
   describe '#touch_in' do
     let(:station) { double :station }
+    let(:journey) { { entry_station: station, exit_station: station } }
     it 'starts the users journey' do
       subject.top_up(20)
       subject.touch_in(station)
@@ -28,28 +33,51 @@ describe Oystercard do
       subject.touch_in(station)
       expect(subject.entry_station).to eq station
     end
+
+    it 'sets exit_station to nil' do
+      subject.top_up(20)
+      subject.touch_in(station)
+      subject.touch_out(station)
+      subject.touch_in(station)
+      expect(subject.exit_station).to eq nil
+    end
   end
 
   describe '#touch_out' do
     let(:station) { double :station }
+    
     it 'ends a users journey' do
       subject.top_up(20)
       subject.touch_in(station)
-      subject.touch_out
+      subject.touch_out(station)
       expect(subject.in_journey?).to eq false
     end
 
     it 'sets entry_station to nil' do
       subject.top_up(20)
       subject.touch_in(station)
-      subject.touch_out
+      subject.touch_out(station)
       expect(subject.entry_station).to eq nil
     end
     it 'deducts money from balance' do
       subject.top_up(20)
       subject.touch_in(station)
-      expect { subject.touch_out }.to change { subject.balance }.by(-Oystercard::MINIMUM_BALANCE)
+      expect { subject.touch_out(station) }.to change { subject.balance }.by(-Oystercard::MINIMUM_BALANCE)
     end
+
+    it 'records exit station' do
+      subject.top_up(20)
+      subject.touch_in(station)
+      subject.touch_out(station)
+      expect(subject.exit_station).to eq station
+    end
+
+    it 'adds journey to journey list' do
+      subject.top_up(20)
+      subject.touch_in(station)
+      expect { subject.touch_out(station) }.to change { subject.journey_list.count }.by (1)
+    end
+
   end
 
   describe '#top_up' do
