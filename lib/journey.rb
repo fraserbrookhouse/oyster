@@ -21,7 +21,7 @@ class Journey
   end
 
   def fare
-    if @entry_station && @exit_station
+    if complete?
       MINIMUM_FARE
     else
       PENALTY_FARE
