@@ -43,7 +43,6 @@ describe Oystercard do
   end
 
   describe '#touch_out' do
-
     it 'ends a users journey' do
       subject.top_up(Oystercard::MAXIMUM_BALANCE)
       subject.touch_in(station)

@@ -1,5 +1,3 @@
-require_relative 'station'
-require_relative 'oystercard'
 class Journey
   attr_accessor :entry_station, :exit_station, :journey
   MINIMUM_FARE = 1
