@@ -38,7 +38,7 @@ describe Oystercard do
       subject.touch_in(station)
       subject.touch_out(station)
       subject.touch_in(station)
-      expect(subject.exit_station).to eq nil
+      expect(subject.current_journey.exit_station).to eq nil
     end
   end
 
@@ -54,7 +54,7 @@ describe Oystercard do
       subject.top_up(Oystercard::MAXIMUM_BALANCE)
       subject.touch_in(station)
       subject.touch_out(station)
-      expect(subject.entry_station).to eq nil
+      expect(subject.current_journey.entry_station).to eq nil
     end
     it 'deducts money from balance' do
       subject.top_up(Oystercard::MAXIMUM_BALANCE)
