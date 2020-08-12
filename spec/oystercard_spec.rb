@@ -17,7 +17,7 @@ describe Oystercard do
 
   describe '#touch_in' do
     let(:station) { double :station }
-    let(:journey) { { entry_station: station, exit_station: station } }
+    let(:journey) { { entry_station: entry_station, exit_station: entry_station } }
     it 'starts the users journey' do
       subject.top_up(20)
       subject.touch_in(station)
@@ -39,6 +39,7 @@ describe Oystercard do
 
   describe '#touch_out' do
     let(:station) { double :station }
+    let(:journey) { { entry_station: station, exit_station: station } }
 
     it 'ends a users journey' do
       subject.top_up(20)
@@ -59,10 +60,17 @@ describe Oystercard do
       expect { subject.touch_out(station) }.to change { subject.balance }.by(-Oystercard::MINIMUM_BALANCE)
     end
 
-    it 'adds journey to journey list' do
+    it 'adds something to journey list' do
       subject.top_up(20)
       subject.touch_in(station)
       expect { subject.touch_out(station) }.to change { subject.journey_list.count }.by 1
+    end
+
+    it 'adds journey to journey list' do
+      subject.top_up(20)
+      subject.touch_in(station)
+      subject.touch_out(station)
+      expect(subject.journey_list).to include journey
     end
   end
 

@@ -16,7 +16,7 @@ class Journey
 
   def end_journey(station)
     @exit_station = station
-    @journey = { @entry_station => @exit_station }
+    @journey = { entry_station: @entry_station, exit_station: @exit_station }
     self
   end
 
