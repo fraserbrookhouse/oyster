@@ -26,8 +26,6 @@ class Journey
     else
       PENALTY_FARE
     end
-    entry_station = nil
-    exit_station = nil
   end
 
   def complete?
