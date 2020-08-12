@@ -8,7 +8,7 @@ describe Oystercard do
   it 'has no journeys' do
     expect(subject.journey_list.count).to eq(0)
   end
-  
+
   describe '#in_journey?' do
     it 'returns false by default' do
       expect(subject).not_to be_in_journey
@@ -28,12 +28,6 @@ describe Oystercard do
       expect { subject.touch_in(station) }.to raise_error 'Insufficient balance'
     end
 
-    it 'records the entry station' do
-      subject.top_up(20)
-      subject.touch_in(station)
-      expect(subject.entry_station).to eq station
-    end
-
     it 'sets exit_station to nil' do
       subject.top_up(20)
       subject.touch_in(station)
@@ -45,7 +39,7 @@ describe Oystercard do
 
   describe '#touch_out' do
     let(:station) { double :station }
-    
+
     it 'ends a users journey' do
       subject.top_up(20)
       subject.touch_in(station)
@@ -65,19 +59,11 @@ describe Oystercard do
       expect { subject.touch_out(station) }.to change { subject.balance }.by(-Oystercard::MINIMUM_BALANCE)
     end
 
-    it 'records exit station' do
-      subject.top_up(20)
-      subject.touch_in(station)
-      subject.touch_out(station)
-      expect(subject.exit_station).to eq station
-    end
-
     it 'adds journey to journey list' do
       subject.top_up(20)
       subject.touch_in(station)
-      expect { subject.touch_out(station) }.to change { subject.journey_list.count }.by (1)
+      expect { subject.touch_out(station) }.to change { subject.journey_list.count }.by 1
     end
-
   end
 
   describe '#top_up' do
