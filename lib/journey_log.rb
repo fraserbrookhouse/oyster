@@ -4,11 +4,16 @@ class Journey_Log
   attr_accessor :journeys
   attr_accessor :current_journey
   
-  def initialize(current_journey: )
-    @journeys = nil
-    @current_journey = Journey
+  def initialize
+    @journeys = []
+    @current_journey = Journey.new
   end
 
   def start(station)
-    current_journey.new
+    @current_journey.start_journey(station)
+  end
+
+  def end(station)
+    @current_journey.end_journey(station)
+  end
 end
