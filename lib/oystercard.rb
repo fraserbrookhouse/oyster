@@ -35,12 +35,8 @@ class Oystercard
   end
 
   def touch_out(station)
-    @journey_log.end_journey(station)
-    deduct(@current_journey.fare)
-    @current_journey.entry_station = nil
-    @current_journey.exit_station = nil
-    store_journey
-    # self.deduct(MINIMUM_BALANCE)
+    @journey_log.end(station)
+    deduct(@journey_log.current_journey.fare)
   end
 
   private

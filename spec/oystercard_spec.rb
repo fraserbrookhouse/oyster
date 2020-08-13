@@ -38,12 +38,6 @@ describe Oystercard do
       expect(subject.in_journey?).to eq false
     end
 
-    it 'sets entry_station to nil' do
-      subject.top_up(Oystercard::MAXIMUM_BALANCE)
-      subject.touch_in(station)
-      subject.touch_out(station)
-      expect(subject.current_journey.entry_station).to eq nil
-    end
     it 'deducts money from balance' do
       subject.top_up(Oystercard::MAXIMUM_BALANCE)
       subject.touch_in(station)
