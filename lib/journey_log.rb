@@ -16,8 +16,6 @@ class Journey_Log
   def end(station)
     @current_journey.end_journey(station)
     store_journey
-    @current_journey.entry_station = nil
-    @current_journey.exit_station = nil
   end
 
   def in_transit?
