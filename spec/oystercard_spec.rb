@@ -7,10 +7,6 @@ describe Oystercard do
     expect(subject.balance).to eq(0)
   end
 
-  it 'has no journeys' do
-    expect(subject.journey_list.count).to eq(0)
-  end
-
   describe '#in_journey?' do
     it 'returns false by default' do
       expect(subject).not_to be_in_journey

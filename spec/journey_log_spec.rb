@@ -11,6 +11,10 @@ describe Journey_Log do
     expect(subject).to respond_to(:current_journey)
   end
 
+  it 'has no journeys by default' do
+    expect(subject.journeys.count).to eq(0)
+  end
+
   describe '#start' do
     it 'adds an entry station' do
       subject.start(station)

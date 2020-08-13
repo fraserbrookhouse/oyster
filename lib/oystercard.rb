@@ -21,7 +21,7 @@ class Oystercard
   end
 
   def in_journey?
-    if @journey_log.current_journey.entry_station
+    if @journey_log.in_transit?
       true
     else
       false
