@@ -48,4 +48,19 @@ describe Journey do
       expect(subject.end_journey(station)).to eq subject
     end
   end
+
+  describe '#reset' do
+    it 'sets entry_station to nil' do
+      subject.start_journey(station)
+      subject.end_journey(station)
+      subject.reset
+      expect(subject.entry_station).to eq nil
+    end
+    it 'sets exit_station to nil' do
+      subject.start_journey(station)
+      subject.end_journey(station)
+      subject.reset
+      expect(subject.exit_station).to eq nil
+    end
+  end
 end

@@ -20,12 +20,6 @@ describe Journey_Log do
       subject.start(station)
       expect(subject.current_journey.entry_station).to eq station
     end
-    it 'sets exit_station to nil' do
-      subject.start(station)
-      subject.end(station)
-      subject.start(station)
-      expect(subject.current_journey.exit_station).to eq nil
-    end
   end
 
   describe '#end' do
@@ -36,11 +30,6 @@ describe Journey_Log do
     end
     it 'adds current_journey to journeys' do
       expect{ subject.end(station) }.to change { subject.journeys.count }.by 1
-    end
-    it 'sets entry_station to nil' do
-      subject.start(station)
-      subject.end(station)
-      expect(subject.current_journey.entry_station).to eq nil
     end
   end
   describe '#in_transit?' do
