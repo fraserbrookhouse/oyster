@@ -28,14 +28,6 @@ describe Oystercard do
     it 'raises error if balance is less than minimum amount' do
       expect { subject.touch_in(station) }.to raise_error 'Insufficient balance'
     end
-
-    it 'sets exit_station to nil' do
-      subject.top_up(Oystercard::MAXIMUM_BALANCE)
-      subject.touch_in(station)
-      subject.touch_out(station)
-      subject.touch_in(station)
-      expect(subject.current_journey.exit_station).to eq nil
-    end
   end
 
   describe '#touch_out' do

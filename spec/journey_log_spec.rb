@@ -20,6 +20,12 @@ describe Journey_Log do
       subject.start(station)
       expect(subject.current_journey.entry_station).to eq station
     end
+    it 'sets exit_station to nil' do
+      subject.start(station)
+      subject.end(station)
+      subject.start(station)
+      expect(subject.current_journey.exit_station).to eq nil
+    end
   end
 
   describe '#end' do
