@@ -17,7 +17,14 @@ class Journey_Log
     @current_journey.end_journey(station)
     store_journey
   end
-  
+
+  def in_transit?
+    if @current_journey.entry_station
+      true
+    else
+      false
+    end
+  end
 
   private
 

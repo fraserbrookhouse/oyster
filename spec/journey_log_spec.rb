@@ -30,11 +30,11 @@ describe Journey_Log do
   end
   describe '#in_transit?' do
     it 'returns false by default' do
-      expect(subject.in_transit).not_to be_in_transit
+      expect(subject).not_to be_in_transit
     end
     it 'returns true after touching in' do
       subject.start(station)
-      expect(subject.in_transit).to be_in_transit
+      expect(subject).to be_in_transit
     end
   end
 end
