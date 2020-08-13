@@ -15,6 +15,15 @@ class Journey_Log
 
   def end(station)
     @current_journey.end_journey(station)
+    store_journey
+  end
+  
+
+  private
+
+  def store_journey
+    @journeys.push(@current_journey.journey)
+    @current_journey.journey = nil
   end
 
 end

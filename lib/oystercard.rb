@@ -21,7 +21,7 @@ class Oystercard
   end
 
   def in_journey?
-    if @current_journey.entry_station
+    if @journey_log.current_journey.entry_station
       true
     else
       false
@@ -45,11 +45,6 @@ class Oystercard
   end
 
   private
-
-  def store_journey
-    @journey_list.push(@current_journey.journey)
-    @current_journey.journey = nil
-  end
 
   def deduct(money)
     @balance -= money
