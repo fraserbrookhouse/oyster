@@ -22,5 +22,8 @@ describe Journey_Log do
       subject.end(station)
       expect(subject.current_journey.exit_station)
     end
+    it 'adds current_journey to journeys' do
+      expect{ subject.end(station) }. to change {subject.journeys.count }.by 1
+    end
   end
 end

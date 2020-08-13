@@ -1,7 +1,7 @@
 require_relative 'journey'
 
 class Journey_Log
-  attr_accessor :journeys
+  attr_reader :journeys
   attr_accessor :current_journey
   
   def initialize
@@ -16,4 +16,5 @@ class Journey_Log
   def end(station)
     @current_journey.end_journey(station)
   end
+
 end
