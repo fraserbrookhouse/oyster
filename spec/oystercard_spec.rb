@@ -43,19 +43,6 @@ describe Oystercard do
       subject.touch_in(station)
       expect { subject.touch_out(station) }.to change { subject.balance }.by(-Oystercard::MINIMUM_BALANCE)
     end
-
-    it 'adds something to journey list' do
-      subject.top_up(Oystercard::MAXIMUM_BALANCE)
-      subject.touch_in(station)
-      expect { subject.touch_out(station) }.to change { subject.journey_list.count }.by 1
-    end
-
-    it 'adds journey to journey list' do
-      subject.top_up(Oystercard::MAXIMUM_BALANCE)
-      subject.touch_in(station)
-      subject.touch_out(station)
-      expect(subject.journey_list).to include journey
-    end
   end
 
   describe '#top_up' do
